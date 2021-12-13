@@ -1,0 +1,6 @@
+P:
+cd P:\ESILV\Année 4\S1\Python for Data Analysis\Projet
+
+python hello.py    
+
+http://127.0.0.1:5000/?Age=%222%22
