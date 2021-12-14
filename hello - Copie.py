@@ -51,16 +51,16 @@ def All_Variable_on_Good_Format(age,height,weight,family_history_with_overweight
 
 def prediction(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC):
     if All_Variable_on_Good_Format(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC)==False:
-        return ("ERROR TYPE: Not valid features")
+        return "ERROR TYPE: Not valid features"
     
 
-    #LOAD BDD
+#LOAD BDD
     url = 'https://github.com/Leodespt/Projet_Python/blob/main/ObesityDataSet_raw_and_data_sinthetic.csv?raw=true'
     df = pd.read_csv(url)
-    #CREATE DATAFRAME TO STORE THE INDIVIDUAL WHO WILL BE TESTED 
+#CREATE DATAFRAME TO STORE THE INDIVIDUAL WHO WILL BE TESTED 
     df_a_tester = pd.DataFrame([[Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC]],
         columns = ['Age','Height','Weight','family_history_with_overweight','FAVC','FCVC','CALC'])    
-    #SCALE YHE VARIABLE 
+#SCALE YHE VARIABLE 
     ord_enc = OrdinalEncoder()
     columns = ["family_history_with_overweight","FAVC","CALC"]
     df[columns] = ord_enc.fit_transform(df[columns])
@@ -69,12 +69,23 @@ def prediction(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC):
         'Obesity_Type_I','Obesity_Type_II','Obesity_Type_III'),(0,1,2,3,4,5,6), inplace = True)
 
     column = ["NObeyesdad","Gender","NCP","CAEC","SMOKE","SCC","FAF","TUE","MTRANS","CH2O"]
-    #SPLIT THE DATA
+#SPLIT THE DATA
     Y_reduiced =df["NObeyesdad"]
     X_reduiced = df.drop(column,1)
 
-    #USING OF A VOTING CLASSIFIER
+#USING OF A VOTING CLASSIFIER
 
+    # model_svc=SVC(probability=True)
+    # model_svc.fit(X_reduiced,Y_reduiced)
+
+    # print(df_a_tester)
+
+    # parameters = {'C' : [150,200,250], 'gamma':[0.02,0.025,0.01]}
+    # grid_svc = GridSearchCV(model_svc,parameters,cv=5)
+    # grid_svc.fit(X_reduiced,Y_reduiced)
+
+
+    # Y_pred_svc = grid_svc.predict(df_a_tester)
     AdaBoost=AdaBoostClassifier()
     GradientBoosting=GradientBoostingClassifier()
     HistGradientBoosting=HistGradientBoostingClassifier()
@@ -102,25 +113,34 @@ def prediction(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC):
     VotingSoft=VotingClassifier(estimators=liste_classifier,voting="soft")
     VotingSoft.fit(X_reduiced,Y_reduiced)
 
+
+    # model_svc=SVC(probability=True)
+    # model_svc.fit(X_reduiced,Y_reduiced)
+
+    # print(df_a_tester)
+
+    # parameters = {'C' : [150,200,250], 'gamma':[0.02,0.025,0.01]}
+    # grid_svc = GridSearchCV(model_svc,parameters,cv=5)
+    # grid_svc.fit(X_reduiced,Y_reduiced)
+
+
     Y_pred_svc = VotingSoft.predict(df_a_tester)
 
-    obesity_prediction=""
+
     if  Y_pred_svc[0] == 0:
         return 'Insufficient_Weight'
     if  Y_pred_svc[0] == 1:
         return 'Normal_Weight'
     if  Y_pred_svc[0] == 2:
-        return  'Overweight_Level_I'
+        return 'Overweight_Level_I'
     if  Y_pred_svc[0] == 3:
-        return  'Overweight_Level_II'
+        return 'Overweight_Level_II'
     if  Y_pred_svc[0] == 4:
-        return  'Obesity_Type_I'
+        return 'Obesity_Type_I'
     if  Y_pred_svc[0] == 5:
-        return  'Obesity_Type_II'
+        return 'Obesity_Type_II'
     else : 
-        return  'Obesity_Type_III'
-
-   
+        return 'Obesity_Type_III'
 
 
 app = Flask(__name__)
@@ -140,24 +160,21 @@ def hello_world():
     CALC = request.args.get('CALC',default=-1,type= int )
 
 
-    return '''<h1>PREDICTION: {}</h1>
-    <h2>Accuracy model of: {}</h2>
-    <h3>Age={} on good Format: {}<br>
-    Height={}  on good Format: {}<br>
-    Weight={}  on good Format {}<br>
-    family_history_with_overweight={}  on good Format: {}<br>
-    FAVC={}  on good Format: {}<br>
-    FCVC={}  on good Format: {}<br>
-    CALC={}  on good Format: {}</h3>
-   
-    '''.format(prediction(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC),"96.7 %",
-    Age,Age_on_GoodFormat(Age),
+    return '''Age={}  on good Format: {}
+    Height={}  on good Format: {}
+    Weight={}  on good Format {}
+    family_history_with_overweight={}  on good Format: {}
+    FAVC={}  on good Format: {}
+    FCVC={}  on good Format: {}
+    CALC={}  on good Format: {}
+    PREDICTION: {}
+    '''.format(Age,Age_on_GoodFormat(Age),
     Height,Height_on_GoodFormat(Height),
     Weight,Weight_on_GoodFormat(Weight),
     Family_history_with_overweight,family_history_with_overweight_on_GoodFormat(Family_history_with_overweight),
     FAVC,FAVC_on_GoodFormat(FAVC),
     FCVC,FCVC_on_GoodFormat(FCVC),
-    CALC,CALC_on_GoodFormat(CALC))
+    CALC,CALC_on_GoodFormat(CALC),prediction(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC))
 
 # All_Variable_on_Good_Format(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC)
 
