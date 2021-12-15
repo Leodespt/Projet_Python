@@ -2,8 +2,8 @@ from flask import Flask
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
-import os
-import seaborn as sns
+# import os
+# import seaborn as sns
 
 
 from sklearn.preprocessing import OrdinalEncoder
@@ -127,7 +127,7 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
+def prediction_obesity():
     
 
     
@@ -159,11 +159,6 @@ def hello_world():
     FCVC,FCVC_on_GoodFormat(FCVC),
     CALC,CALC_on_GoodFormat(CALC))
 
-# All_Variable_on_Good_Format(Age,Height,Weight,Family_history_with_overweight,FAVC,FCVC,CALC)
-
-
-    # 
-    # return "<p><b>Hello</b>, World!</p>"
     
 
 
