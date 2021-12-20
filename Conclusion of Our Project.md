@@ -4,13 +4,13 @@
 
 During this project I have learned to work on data-visualization, modeling of classifier and using a flask application.
 
-Concerning data-visualization, I have been led to reuse the basic libraries seen during the TD: numpy, panda, matplotlib, seaborn. I learn how to work on a dataframe (group by, drop column, count) and plot multiple graphs. 
+Concerning data-visualization, I have been led to reuse the basic libraries seen during the practical works: numpy, panda, matplotlib, seaborn. I also learned how to work on a dataframe (group by, drop column, count) and plot multiple graphs. 
 
-About Modeling classifier, I have discovered several types of classifiers: bagging, boosting, stacking and voting. I have also become aware of the importance of a grid search to find optimize classifiers. 
+About Modeling classifier, I have discovered several types of classifiers: bagging, boosting, stacking and voting. I have also become aware of the importance of a grid search to find optimized classifiers. 
 
-Thanks to this project I have develop a method of work to find a final model with a good accuracy (I explain it in the conclusion of our power point). 
+Thanks to this project I have developped a method of work to find a final model with a good accuracy (I explain it in the conclusion of our power point). 
 
-Regarding the creation and use of a flask application. I had a lot of difficulty to understand how it worked. I have met many problems with the import and the compatibility of the libraries I needed. Thanks to this part of the project, I have developed my knowledge about the command prompt (creation and deletion of environment, installation of libraries, moving throw the drive, launching file). I also learn about the use of flash request with URL parameters. I am proud to have implemented a few html in our project and also a set up of 8 functions of verifications in order to avoid crash of the application and allows to have a clean interface.  As a bonus, I have discovered the import of python file in another python file. 
+Regarding the creation and use of a flask application. I had a lot of difficulty to understand how it worked. I have met many problems with the import and the compatibility of the libraries I needed. Thanks to this part of the project, I have developed my knowledge about the command prompt (creation and deletion of environment, installation of libraries, moving throw the drive, launching file). I also learn about the use of flash request with URL parameters. I am proud to have implemented a few html in our project and also a set up of 8 functions of verifications in order to avoid crash of the application and allows to have a clean interface. As a bonus, I have discovered the import of python file in another python file. 
 
 ## Leonard
 
