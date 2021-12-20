@@ -1,4 +1,4 @@
-# Conclusion of Our Project
+# Conclusion of our Project
 
 ## Romain
 
